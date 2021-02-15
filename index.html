@@ -2,11 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>todo list</title>
+    <title>Todo List</title>
     <link rel='stylesheet' href='styles.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body class='bodyContainer'>
-    <div id='content' class='content'></div>
+      <div id='headerContainer'>
+        <h1 id='header'>Todo List</h1>
+      </div>
+      <div id='sidebarContainer'>
+        <div id='sidebarTabs'>
+          <li><button id='inbox'>Inbox</button></li>
+          <li><button id='today'>Today</button></li>
+          <li><button id='thisWeek'>This Week</button></li>
+          <li id='projectsContainer'>
+            <h2 id='projectsHeader'>Projects</h2>
+            <div id='projectList'>
+
+            </div>
+            <button id='addProject'>
+              <i class='material-icons'>add</i>
+              Add Project</button>
+          </li>
+        </div>
+      </div>
+      <div id='mainContent'>
+          <h3>main content</h3>
+      </div>
     <script src="main.js"></script>
   </body>
 </html>
