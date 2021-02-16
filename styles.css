@@ -67,24 +67,54 @@ body{
 #mainContent{
     grid-area: main;
     width: 800px;
-    height: 80%;
     margin: 50px auto;
+    /*
     display: grid;
     grid-template-rows: 50px auto;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    */
 }
 
-#todoContainer{
-    vertical-align: middle;
+#todoTitleContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #todoProjectTitle{
     font-size: 25px;
     line-height: 100%;
     margin: auto 10px auto;
+    border-bottom: 2px solid black;
 }
 
 #todoDateTitle{
     text-align: right;
-    font-size: 20px;
+    font-size: 25px;
+    margin: auto 10px auto;
+    border-bottom: 2px solid black;
+}
+
+#todoListContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* divide task into left and right side */
+.todoTask{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-top: 2px solid blue;
+    border-bottom: 2px solid blue;
+}
+
+.addTask{
+    display: block;
+    width: 100%;
+    height: 40px;
+}
+
+.addTask i{
+    vertical-align: middle;
 }

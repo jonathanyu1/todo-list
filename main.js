@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log("hello")})();
+(()=>{"use strict";var e;console.log("hello"),(e="chores",{getName:()=>e,setName:l=>{e=l},addTask:e=>{},deleteTask:e=>{},sayHello:()=>console.log("hello project")}).sayHello()})();
