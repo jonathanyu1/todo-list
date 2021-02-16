@@ -1,4 +1,5 @@
 import { format, compareAsc } from 'date-fns'
+import { project } from './project.js';
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
@@ -10,3 +11,5 @@ import { format, compareAsc } from 'date-fns'
 // console.log(dates);
 
 console.log('hello');
+const chores = project('chores');
+chores.sayHello();
