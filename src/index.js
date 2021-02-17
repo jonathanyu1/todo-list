@@ -1,7 +1,7 @@
 import { format, compareAsc } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm } from './dom.js'
+import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom } from './dom.js'
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
@@ -20,13 +20,42 @@ console.log('hello');
 const today = project('today');
 const week = project('week');
 
-const UI = (()=>{
+const siteFlow = (()=>{
 
-    
+    let projectList = [];
+
+    const addProject = (projectName) =>{
+        const newProject = project(projectName);
+        projectList.push(newProject);
+    }
+
+    // event listeners for project and tasks
+
+    const btnNewProject = document.querySelector('#newProject');
+    btnNewProject.addEventListener('click', ()=>{
+        openProjectForm();
+    });
+
+    const btnCancelProject = document.querySelector('#projectCancelBtn');
+    btnCancelProject.addEventListener('click', ()=>{
+        closeProjectForm();
+    });
+
+    const btnAddProject = document.querySelector('#projectAddBtn');
+
+    btnAddProject.addEventListener('click', ()=>{
+        const projectName = document.querySelector('#projectInputName');
+        console.log(projectName.value);
+        // const newProject = project(projectName.value);
+        addProject(projectName.value);
+        addProjectDom(projectName.value);
+        console.log(projectList[0].getName);
+        closeProjectForm();
+    });
 
     // put this after logic to display project tasks
-    const btnNewTask = document.querySelector('.addTask');
-    btnNewTask.addEventListener('click', ()=>{
+    const btnAddTask = document.querySelector('.addTask');
+    btnAddTask.addEventListener('click', ()=>{
         openTaskForm();
     });
     const btnCancelForm = document.querySelector('#btnCloseForm');

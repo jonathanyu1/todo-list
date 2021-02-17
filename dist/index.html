@@ -10,6 +10,7 @@
       <div id='headerContainer'>
         <h1 id='header'>Todo List</h1>
       </div>
+
       <div id='sidebarContainer'>
         <div id='sidebarTabs'>
           <li><button id='inbox'>Inbox</button></li>
@@ -18,14 +19,22 @@
           <li id='projectsContainer'>
             <h2 id='projectsHeader'>Projects</h2>
             <div id='projectList'>
-
+                
             </div>
-            <button id='addProject'>
+            <button id='newProject'>
               <i class='material-icons'>add</i>
-              Add Project</button>
+              New Project</button>
+            <div id='projectPopupContainer' class='hideContent'>
+              <input id='projectInputName' type='text' maxlength='16'>
+              <div id='projectBtnContainer'>
+                  <button class='projectInputBtn' id='projectAddBtn'>Add</button>
+                  <button class='projectInputBtn' id='projectCancelBtn'>Cancel</button>
+              </div>
+            </div>
           </li>
         </div>
       </div>
+
       <div id='mainContent'>
           <div id='todoTitleContainer'>
             <div id='todoProjectTitle'>Inbox</div>
@@ -38,6 +47,7 @@
             <i class='material-icons'>add</i>
           Add Task</button>
       </div>
+
       <div id='formContainer' class='hideContent'>
         <form class='formPopup' id= 'formPopup' novalidate>
           <p class='formHeader'>New Task</p>
