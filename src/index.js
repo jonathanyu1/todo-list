@@ -1,7 +1,7 @@
 import { format, compareAsc } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom } from './dom.js'
+import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown } from './dom.js'
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
@@ -29,6 +29,16 @@ const siteFlow = (()=>{
         projectList.push(newProject);
     }
 
+    const updateProjectDropdown = () => {
+        // clear list first then add all in project list
+        clearProjectDropdown();
+        updateDomProjectDropdown('inbox'); // change this inbox string to object when created later
+        projectList.forEach(item=>{
+            console.log(item);
+            updateDomProjectDropdown(item.getName());
+        });
+    }
+
     // event listeners for project
 
     const btnNewProject = document.querySelector('#newProject');
@@ -44,25 +54,24 @@ const siteFlow = (()=>{
     const btnAddProject = document.querySelector('#projectAddBtn');
     btnAddProject.addEventListener('click', ()=>{
         const projectName = document.querySelector('#projectInputName');
-        console.log(projectName.value);
-        // const newProject = project(projectName.value);
         addProject(projectName.value);
         addProjectDom(projectName.value);
-        console.log(projectList[0].getName);
         closeProjectForm();
     });
 
     // event listeners for tasks
 
-    // put this after logic to display project tasks
     const btnNewTask = document.querySelector('.newTask');
     btnNewTask.addEventListener('click', ()=>{
         openTaskForm();
+        // update project selection list
+        updateProjectDropdown();
     });
 
     const btnAddTask = document.querySelector('.btnAddTask');
     btnAddTask.addEventListener('click', ()=>{
         closeTaskForm();
+        // add task to project with its details, display
     });
 
     const btnCancelForm = document.querySelector('#btnCloseForm');

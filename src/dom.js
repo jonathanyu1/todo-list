@@ -1,4 +1,5 @@
 import { project } from "./project";
+import { task } from "./task";
 
 const openTaskForm = () => {
     document.getElementById('formContainer').classList.remove('hideContent');
@@ -39,4 +40,16 @@ const addProjectDom = (projectName) => {
                                 </button></li>`
     // add left right side, delete button
 }
-export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom}
+
+const clearProjectDropdown = () => {
+    const taskProject = document.querySelector('#taskProject');
+    while (taskProject.lastChild){
+        taskProject.removeChild(taskProject.lastChild);
+    }
+}
+
+const updateDomProjectDropdown = (projectName) => {
+    const taskProject = document.querySelector('#taskProject');
+    taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
+}
+export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown}
