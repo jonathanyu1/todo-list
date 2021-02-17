@@ -13,9 +13,9 @@
 
       <div id='sidebarContainer'>
         <div id='sidebarTabs'>
-          <li><button id='inbox'>Inbox</button></li>
-          <li><button id='today'>Today</button></li>
-          <li><button id='thisWeek'>This Week</button></li>
+          <li><button id='inbox' class='defaultProject'>Inbox</button></li>
+          <li><button id='today' class='defaultProject'>Today</button></li>
+          <li><button id='thisWeek' class='defaultProject'>This Week</button></li>
           <li id='projectsContainer'>
             <h2 id='projectsHeader'>Projects</h2>
             <div id='projectList'>
@@ -43,13 +43,13 @@
           <div id='todoListContainer'>
             <div>hi</div>
           </div>
-          <button class='addTask'>
+          <button class='newTask'>
             <i class='material-icons'>add</i>
           Add Task</button>
       </div>
 
       <div id='formContainer' class='hideContent'>
-        <form class='formPopup' id= 'formPopup' novalidate>
+        <form class='formPopup' id= 'formPopup'>
           <p class='formHeader'>New Task</p>
           <input class='formInput' type='text' placeholder='Title' id='titleInput' required>
           <input class='formInput' type='text' placeholder='Description' id='descriptionInput' required>
@@ -64,7 +64,7 @@
           <select id='taskProject' name='taskProject'>
               <option value='all'>All</option>
           </select>
-          <button class='btnAddNote' form='formContainer' type='submit' id='btnAddForm'>Add</button>
+          <button class='btnAddTask' form='formContainer' type='submit' id='btnAddTask'>Add</button>
           <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
         </form>
       </div>

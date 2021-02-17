@@ -40,6 +40,7 @@ body{
 #sidebarContainer{
     grid-area: sidebar;
     background-color: yellow;
+    padding: 20px;
 }
 
 #sidebarTabs li{
@@ -62,6 +63,41 @@ body{
 #sidebarTabs i{
     vertical-align: middle;
 }
+
+/*
+#sidebarContainer button{
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+}
+*/
+
+.defaultProject, #projectList button, #newProject {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+}
+
+.btnProject{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* project add pop up */
+
+#projectAddBtn, #projectCancelBtn{
+    width: 49%;
+    text-align: center;
+}
+
+#newProject,#projectPopupContainer{
+    margin-top: 20px;
+}
+
+#projectInputName{
+    width: 100%;
+}
+
 
 /* add project form */
 
@@ -114,13 +150,13 @@ body{
     border-bottom: 2px solid blue;
 }
 
-.addTask{
+.newTask{
     display: block;
     width: 100%;
     height: 40px;
 }
 
-.addTask i{
+.newTask i{
     vertical-align: middle;
 }
 

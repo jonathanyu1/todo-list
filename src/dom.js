@@ -23,13 +23,20 @@ const closeProjectForm = () => {
 
 const addProjectDom = (projectName) => {
     // creates a button with li tag wrapped around it, appends to 'projectList' node
-    let projectList = document.getElementById('projectList');
-    let newListProject = document.createElement('li');
-    let newProject = document.createElement('button');
-    newProject.classList.add('btnProject');
-    newProject.innerHTML = projectName;
-    newListProject.appendChild(newProject);
-    projectList.appendChild(newListProject);
+    const projectList = document.getElementById('projectList');
+    // let newListProject = document.createElement('li');
+    // let newProject = document.createElement('button');
+    // newProject.classList.add('btnProject');
+    // newProject.innerHTML = projectName;
+    // newListProject.appendChild(newProject);
+    // projectList.appendChild(newListProject);
+    projectList.innerHTML += `<li><button class='btnProject'>
+                                    <div class='projectLeftSide'>
+                                    <i class='material-icons'>assignment</i>
+                                    <span class='projectName'>${projectName}</span>
+                                    </div>
+                                    <i class='material-icons'>delete</i>
+                                </button></li>`
     // add left right side, delete button
 }
 export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom}

@@ -29,7 +29,7 @@ const siteFlow = (()=>{
         projectList.push(newProject);
     }
 
-    // event listeners for project and tasks
+    // event listeners for project
 
     const btnNewProject = document.querySelector('#newProject');
     btnNewProject.addEventListener('click', ()=>{
@@ -42,7 +42,6 @@ const siteFlow = (()=>{
     });
 
     const btnAddProject = document.querySelector('#projectAddBtn');
-
     btnAddProject.addEventListener('click', ()=>{
         const projectName = document.querySelector('#projectInputName');
         console.log(projectName.value);
@@ -53,11 +52,19 @@ const siteFlow = (()=>{
         closeProjectForm();
     });
 
+    // event listeners for tasks
+
     // put this after logic to display project tasks
-    const btnAddTask = document.querySelector('.addTask');
-    btnAddTask.addEventListener('click', ()=>{
+    const btnNewTask = document.querySelector('.newTask');
+    btnNewTask.addEventListener('click', ()=>{
         openTaskForm();
     });
+
+    const btnAddTask = document.querySelector('.btnAddTask');
+    btnAddTask.addEventListener('click', ()=>{
+        closeTaskForm();
+    });
+
     const btnCancelForm = document.querySelector('#btnCloseForm');
     btnCancelForm.addEventListener('click', ()=>{
         closeTaskForm();
