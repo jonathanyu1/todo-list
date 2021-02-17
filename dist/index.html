@@ -38,6 +38,27 @@
             <i class='material-icons'>add</i>
           Add Task</button>
       </div>
+      <div id='formContainer' class='hideContent'>
+        <form class='formPopup' id= 'formPopup' novalidate>
+          <p class='formHeader'>New Task</p>
+          <input class='formInput' type='text' placeholder='Title' id='titleInput' required>
+          <input class='formInput' type='text' placeholder='Description' id='descriptionInput' required>
+          <input type="date" id="taskDueDate" required>
+          <label for='taskPriority'>Choose a priority:</label>
+          <select id='taskPriority' name='taskPriority'>
+              <option value='low'>Low</option>
+              <option value='medium'>Medium</option>
+              <option value='High'>High</option>
+          </select>
+          <label for='taskProject'>Choose a project:</label>
+          <select id='taskProject' name='taskProject'>
+              <option value='all'>All</option>
+          </select>
+          <button class='btnAddNote' form='formContainer' type='submit' id='btnAddForm'>Add</button>
+          <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
+        </form>
+      </div>
+
     <script src="main.js"></script>
   </body>
 </html>

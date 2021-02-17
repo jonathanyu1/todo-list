@@ -10,12 +10,22 @@ const project = (name) => {
 
     }
 
+    const getTasks = () =>{
+
+    }
+
+    const getTask = (taskName) =>{
+
+    }
+
     const sayHello = () => console.log('hello project');
     return {
         getName,
         setName,
         addTask,
         deleteTask,
+        getTasks,
+        getTask,
         sayHello
     }
 }
