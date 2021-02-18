@@ -31,9 +31,65 @@ const siteFlow = (()=>{
         alert('You cannot have the same title!');
     }
 
+    function selectCurrentProject (projectName){
+        let currProject = '';
+        projectList.forEach(item=>{
+            console.log(item);
+            console.log(projectName);
+            console.log(item.getName() + ' get name');
+            if (item.getName() === projectName){
+                currProject=item;
+            }
+        });
+        return currProject;
+    }
+
+    const displayTasks = (currProject) => {
+        const tasks = currProject.getTasks();
+        console.log(tasks);
+    }
+
+    const displayProject = (projectName) => {
+        // get corresponding project object
+        let currProject = selectCurrentProject(projectName);
+        // projectList.forEach(item=>{
+        //     console.log(item.getName() + ' get name');
+        //     if (item.getName() === projectName){
+        //         currProject = item;
+        //     }
+        // });
+        console.log(currProject);
+        // set title
+        const todoProjectTitle = document.querySelector('#todoProjectTitle');
+        todoProjectTitle.innerHTML = currProject.getName();
+        // clear current tasks
+        // clearDomCurrTasks();
+        // display tasks
+        displayTasks(currProject);
+    }
+
+    const projectEventListener = () => {
+        const btnProjects = document.querySelectorAll('.btnProject');
+        btnProjects.forEach(item=>{
+            console.log(item);
+            const nameChild = item.querySelector(`.projectName`);
+            console.log(nameChild.innerHTML+'inner');
+            item.addEventListener('click', ()=>{
+                console.log('added');
+                displayProject(nameChild.innerHTML);
+            });
+            // if (nameChild.innerHTML === projectName){
+            //     item.addEventListener('click', ()=>{
+            //         console.log('added');
+            //     });
+            // }
+        })
+    }
+
     const addProject = (projectName) =>{
         const newProject = project(projectName);
         projectList.push(newProject);
+        projectEventListener(newProject);
     }
 
     const addTaskToProject = (task) =>{
@@ -55,6 +111,11 @@ const siteFlow = (()=>{
         const newTask = task(titleInput.value, descriptionInput.value, taskDueDate.value, taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
+        // clear current displayed tasks
+
+        // display project again
+        let currProject = selectCurrentProject(taskProject.value);
+        displayTasks(currProject);
     }
 
     const defaultProjectInit = (() => {
@@ -98,6 +159,7 @@ const siteFlow = (()=>{
         } else{
             addProject(projectName.value);
             addProjectDom(projectName.value);
+            projectEventListener();
             closeProjectForm();
         }
     });

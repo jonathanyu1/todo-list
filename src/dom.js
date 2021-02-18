@@ -31,10 +31,21 @@ const addProjectDom = (projectName) => {
     // newProject.innerHTML = projectName;
     // newListProject.appendChild(newProject);
     // projectList.appendChild(newListProject);
+
+    // projectList.innerHTML += `<li><div class='project'>
+    //                             <button class='btnProjectLeftSide'>
+    //                                 <i class='material-icons'>assignment</i>
+    //                                 <span class='projectName'>${projectName}</span>
+    //                             </button>
+    //                             <button class='btnProjectRightSide'>
+    //                                 <i class='material-icons'>delete</i>
+    //                             </button>
+    //                         </div></li>`
+    
     projectList.innerHTML += `<li><button class='btnProject'>
                                     <div class='projectLeftSide'>
-                                    <i class='material-icons'>assignment</i>
-                                    <span class='projectName'>${projectName}</span>
+                                        <i class='material-icons'>assignment</i>
+                                        <span class='projectName'>${projectName}</span>
                                     </div>
                                     <i class='material-icons'>delete</i>
                                 </button></li>`
