@@ -1,7 +1,7 @@
 import { format, compareAsc } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown } from './dom.js'
+import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks } from './dom.js'
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
@@ -47,6 +47,7 @@ const siteFlow = (()=>{
     const displayTasks = (currProject) => {
         const tasks = currProject.getTasks();
         console.log(tasks);
+        displayDomTasks(tasks);
     }
 
     const displayProject = (projectName) => {
@@ -108,7 +109,7 @@ const siteFlow = (()=>{
         const taskDueDate = document.querySelector('#taskDueDate');
         const taskProject = document.querySelector('#taskProject');
         const taskPriority = document.querySelector('#taskPriority');
-        const newTask = task(titleInput.value, descriptionInput.value, taskDueDate.value, taskPriority.value, taskProject.value);
+        const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
         // clear current displayed tasks

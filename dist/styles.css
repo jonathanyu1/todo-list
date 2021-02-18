@@ -138,6 +138,7 @@ body{
 #todoListContainer{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 /* divide task into left and right side */

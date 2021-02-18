@@ -41,7 +41,7 @@ const addProjectDom = (projectName) => {
     //                                 <i class='material-icons'>delete</i>
     //                             </button>
     //                         </div></li>`
-    
+
     projectList.innerHTML += `<li><button class='btnProject'>
                                     <div class='projectLeftSide'>
                                         <i class='material-icons'>assignment</i>
@@ -63,4 +63,16 @@ const updateDomProjectDropdown = (projectName) => {
     const taskProject = document.querySelector('#taskProject');
     taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
 }
-export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown}
+
+const displayDomTasks = (tasks) => {
+    // sort task order using date-fns
+    
+    // add task.setAttribute('data-index',`${index}`);
+    tasks.forEach(item=>{
+        console.log(item.getTitle());
+        console.log(item.getDate());
+       
+    });
+}
+
+export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, displayDomTasks}
