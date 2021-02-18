@@ -3,7 +3,8 @@ import { format, compareAsc } from 'date-fns'
 // format(new Date(2014, 1, 11), 'MM/dd/yyyy')
 // use this for date 
 
-const task = (title, description, dueDate, priority, project, status) =>{
+const task = (title, description, dueDate, priority, project) =>{
+
     const getTitle = () => title;
 
     const setTitle = (newTitle) =>{
