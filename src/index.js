@@ -3,6 +3,17 @@ import { project } from './project.js';
 import { task } from './task.js';
 import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks } from './dom.js'
 
+
+// * Things Left to do: *     
+// - functionality of clicking inbox, today, this week
+// - functionality of clicking tasks to reveal details
+// - functionality of deleting project, including its tasks
+// - functionality of deleting tasks
+// - functionality of editing tasks
+// - styling 
+// - fix date bug with timezone
+// - set default value of date picker to today
+
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
 //     new Date(1995, 6, 2),
@@ -18,7 +29,7 @@ console.log('hello');
 // console.log(chores.getName);
 
 const siteFlow = (()=>{
-    //const inbox = project('inbox');
+    // const inbox = project('inbox');
 
     let projectList = [];
 
@@ -122,7 +133,7 @@ const siteFlow = (()=>{
     }
 
     const defaultProjectInit = (() => {
-        addProject('inbox');
+        addProject('Inbox');
         // add event listener for inbox
         
     })();
@@ -183,9 +194,6 @@ const siteFlow = (()=>{
         // need to add check to prevent same title tasks
         addTask();
         closeTaskForm();
-        // display
-        
-        // re-display current project
     });
 
     const btnCancelForm = document.querySelector('#btnCloseForm');
