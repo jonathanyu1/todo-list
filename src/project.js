@@ -1,6 +1,18 @@
 const project = (name) => {
     let tasksList = [];
 
+    // sorts tasks by date
+    // https://stackoverflow.com/a/1129270
+    function compare(a,b){
+        if ( a.getDate() < b.getDate() ){
+            return -1;
+        }
+        if ( a.getDate() > b.getDate() ){
+            return 1;
+        }
+        return 0;
+    }
+
     const getName = () => name;
     const setName = (newName) =>{
         name = newName;
@@ -18,6 +30,10 @@ const project = (name) => {
 
     }
 
+    const sortTasksByDate = () =>{
+        tasksList.sort(compare);
+    }
+
     const sayHello = () => console.log('hello project');
     return {
         getName,
@@ -26,7 +42,8 @@ const project = (name) => {
         deleteTask,
         getTasks,
         getTask,
-        sayHello
+        sayHello,
+        sortTasksByDate
     }
 }
 

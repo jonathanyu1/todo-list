@@ -55,10 +55,11 @@ const siteFlow = (()=>{
     }
 
     const displayTasks = (currProject) => {
-        const tasks = currProject.getTasks();
-        console.log(tasks);
-        console.log('tasks of ' + currProject.getName());
-        displayDomTasks(tasks, currProject.getName());
+        // const tasks = currProject.getTasks();
+        // console.log(tasks);
+        // console.log('tasks of ' + currProject.getName());
+        // displayDomTasks(tasks, currProject.getName());
+        displayDomTasks(currProject);
     }
 
     const displayProject = (projectName) => {

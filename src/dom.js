@@ -65,15 +65,7 @@ const updateDomProjectDropdown = (projectName) => {
     taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
 }
 
-function compare(a,b){
-    if ( a.getDate() < b.getDate() ){
-        return -1;
-    }
-    if ( a.getDate() > b.getDate() ){
-        return 1;
-    }
-    return 0;
-}
+
 const clearDomTasks = () => {
     const todoListContainer = document.querySelector('#todoListContainer');
     while (todoListContainer.lastChild){
@@ -86,14 +78,50 @@ const changeProjectTitle = (projectTitle) => {
     todoProjectTitle.innerHTML = projectTitle;
 }
 
-const displayDomTasks = (tasks,projectName) => {
-    // tasks.sort((a,b)=>a.getDate()>b.getDate());
-    // https://stackoverflow.com/a/1129270
-    tasks.sort(compare);
-    const todoListContainer = document.querySelector('#todoListContainer');
-    changeProjectTitle(projectName);
+function compare(a,b){
+    if ( a.getDate() < b.getDate() ){
+        return -1;
+    }
+    if ( a.getDate() > b.getDate() ){
+        return 1;
+    }
+    return 0;
+}
+
+// const displayDomTasks = (tasks,projectName) => {
+//     // tasks.sort((a,b)=>a.getDate()>b.getDate());
+//     // https://stackoverflow.com/a/1129270
+//     tasks.sort(compare);
+//     const todoListContainer = document.querySelector('#todoListContainer');
+//     changeProjectTitle(projectName);
+//     clearDomTasks();
+//     tasks.forEach((item,index)=>{
+//         console.log(item.getTitle());
+//         console.log(item.getDate());
+//         console.log(typeof(item.getDate()));
+//         console.log('index= '+index);
+//         todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+//                                             <div class='taskLeftSide'>
+//                                                 <input type='checkbox' class='taskCheckbox'>
+//                                                 <button class='btnTaskDetails'>
+//                                                     <span class='taskTitle'>${item.getTitle()}</span>
+//                                                 </button>
+//                                             </div>
+//                                             <div class='taskRightSide'>
+//                                                 <span class='taskDate'>${item.getDate()}</span>
+//                                                 <button class='btnTaskDelete'>X</button>
+//                                             </div>
+//                                         </div>`
+//     });
+// }
+
+const displayDomTasks = (projectObject) => {
+    // tasks.sort(compare);
+    projectObject.sortTasksByDate();
+    changeProjectTitle(projectObject.getName());
     clearDomTasks();
-    tasks.forEach((item,index)=>{
+    const todoListContainer = document.querySelector('#todoListContainer');
+    projectObject.getTasks().forEach((item,index)=>{
         console.log(item.getTitle());
         console.log(item.getDate());
         console.log(typeof(item.getDate()));
