@@ -1,5 +1,6 @@
 import { project } from "./project";
 import { task } from "./task";
+import { format, compareAsc } from 'date-fns'
 
 const openTaskForm = () => {
     document.getElementById('formContainer').classList.remove('hideContent');
@@ -64,13 +65,26 @@ const updateDomProjectDropdown = (projectName) => {
     taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
 }
 
+function compare(a,b){
+    if ( a.getDate() < b.getDate() ){
+        return -1;
+    }
+    if ( a.getDate() > b.getDate() ){
+        return 1;
+    }
+    return 0;
+}
+
 const displayDomTasks = (tasks) => {
     // sort task order using date-fns
-    
+    // tasks.sort((a,b)=>a.getDate()>b.getDate());
+    // https://stackoverflow.com/a/1129270
+    tasks.sort(compare);
     // add task.setAttribute('data-index',`${index}`);
     tasks.forEach(item=>{
         console.log(item.getTitle());
         console.log(item.getDate());
+        console.log(typeof(item.getDate()));
        
     });
 }

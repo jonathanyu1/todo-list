@@ -1,4 +1,4 @@
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
 import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks } from './dom.js'
@@ -16,7 +16,6 @@ console.log('hello');
 // const chores = project('chores');
 // chores.sayHello();
 // console.log(chores.getName);
-
 
 const siteFlow = (()=>{
     //const inbox = project('inbox');
@@ -109,6 +108,9 @@ const siteFlow = (()=>{
         const taskDueDate = document.querySelector('#taskDueDate');
         const taskProject = document.querySelector('#taskProject');
         const taskPriority = document.querySelector('#taskPriority');
+        console.log(taskDueDate.value);
+        // this format bugs the date since it converts it into some timezone behind 1 day
+        // format(new Date(taskDueDate.value), 'MM/dd/yyyy')
         const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
