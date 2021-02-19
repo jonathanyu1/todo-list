@@ -74,18 +74,42 @@ function compare(a,b){
     }
     return 0;
 }
+const clearDomTasks = () => {
+    const todoListContainer = document.querySelector('#todoListContainer');
+    while (todoListContainer.lastChild){
+        todoListContainer.removeChild(todoListContainer.lastChild);
+    }
+}
 
-const displayDomTasks = (tasks) => {
-    // sort task order using date-fns
+const changeProjectTitle = (projectTitle) => {
+    const todoProjectTitle = document.querySelector('#todoProjectTitle');
+    todoProjectTitle.innerHTML = projectTitle;
+}
+
+const displayDomTasks = (tasks,projectName) => {
     // tasks.sort((a,b)=>a.getDate()>b.getDate());
     // https://stackoverflow.com/a/1129270
     tasks.sort(compare);
-    // add task.setAttribute('data-index',`${index}`);
-    tasks.forEach(item=>{
+    const todoListContainer = document.querySelector('#todoListContainer');
+    changeProjectTitle(projectName);
+    clearDomTasks();
+    tasks.forEach((item,index)=>{
         console.log(item.getTitle());
         console.log(item.getDate());
         console.log(typeof(item.getDate()));
-       
+        console.log('index= '+index);
+        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+                                            <div class='taskLeftSide'>
+                                                <input type='checkbox' class='taskCheckbox'>
+                                                <button class='btnTaskDetails'>
+                                                    <span class='taskTitle'>${item.getTitle()}</span>
+                                                </button>
+                                            </div>
+                                            <div class='taskRightSide'>
+                                                <span class='taskDate'>${item.getDate()}</span>
+                                                <button class='btnTaskDelete'>X</button>
+                                            </div>
+                                        </div>`
     });
 }
 

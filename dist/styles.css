@@ -126,6 +126,7 @@ body{
     line-height: 100%;
     /* margin: auto 10px auto; */
     border-bottom: 2px solid black;
+    margin-bottom:20px;
 }
 
 #todoDateTitle{
@@ -133,12 +134,39 @@ body{
     font-size: 25px;
     /* margin: auto 10px auto; */
     border-bottom: 2px solid black;
+    margin-bottom:20px;
 }
 
 #todoListContainer{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    border-top: 2px solid lightblue;
+}
+
+/* Task */
+
+.task{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid lightblue;
+    /* priority colouring 
+    border-left: 2px solid yellow; */
+}
+
+.task button{
+    height: 100%;
+    border:none;
+    background-color: white;
+    font-size: 15px;
+}
+
+.task span{
+    
 }
 
 /* divide task into left and right side */
@@ -155,6 +183,7 @@ body{
     display: block;
     width: 100%;
     height: 40px;
+    margin-top: 20px;
 }
 
 .newTask i{
@@ -190,3 +219,4 @@ body{
 #taskDueDate{
     width: 300px;
 }
+

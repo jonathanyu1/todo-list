@@ -46,7 +46,8 @@ const siteFlow = (()=>{
     const displayTasks = (currProject) => {
         const tasks = currProject.getTasks();
         console.log(tasks);
-        displayDomTasks(tasks);
+        console.log('tasks of ' + currProject.getName());
+        displayDomTasks(tasks, currProject.getName());
     }
 
     const displayProject = (projectName) => {
@@ -89,7 +90,6 @@ const siteFlow = (()=>{
     const addProject = (projectName) =>{
         const newProject = project(projectName);
         projectList.push(newProject);
-        projectEventListener(newProject);
     }
 
     const addTaskToProject = (task) =>{
@@ -116,13 +116,15 @@ const siteFlow = (()=>{
         addTaskToProject(newTask);
         // clear current displayed tasks
 
-        // display project again
+        // display project
         let currProject = selectCurrentProject(taskProject.value);
         displayTasks(currProject);
     }
 
     const defaultProjectInit = (() => {
         addProject('inbox');
+        // add event listener for inbox
+        
     })();
 
     const updateProjectDropdown = () => {
