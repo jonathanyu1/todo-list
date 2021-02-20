@@ -1,6 +1,6 @@
 import { project } from "./project";
 import { task } from "./task";
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc, isToday, isThisWeek, parseISO,toDate } from 'date-fns'
 
 const openTaskForm = () => {
     document.getElementById('formContainer').classList.remove('hideContent');
@@ -141,14 +141,10 @@ const displayDomTasks = (projectObject) => {
     });
 }
 
-const displayDomTasksDefault = (projectList, defaultProject) => {
-    // let defaultTasks = [];
+const addTasksDefault = (projectList, defaultProject) => {
     clearDomTasks();
     // clear defaultProject's tasks
     defaultProject.clearTasks();
-    // set title to 'default'
-    console.log(defaultProject.getName());
-    changeProjectTitle(defaultProject.getName());
     // add all tasks into defaultProject's tasks
     projectList.forEach((projectObject)=>{
         projectObject.getTasks().forEach((item)=>{
@@ -158,6 +154,65 @@ const displayDomTasksDefault = (projectList, defaultProject) => {
     });
     // sort
     defaultProject.sortTasksByDate();
+}
+
+function checkToday (taskDate){
+    const today = format(new Date(),'MM/dd/yyyy');
+    console.log(today);
+    console.log(taskDate);
+    return (today===taskDate);
+}
+
+const displayDomTasksToday = (defaultProject) => {
+    const todoListContainer = document.querySelector('#todoListContainer');
+    let index=0;
+    defaultProject.getTasks().forEach((item)=>{
+        if (checkToday(item.getDate())){
+            console.log(`today! ${item.getTitle()}`);
+            todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+                                            <div class='taskLeftSide'>
+                                                <input type='checkbox' class='taskCheckbox'>
+                                                <button class='btnTaskDetails'>
+                                                    <span class='taskTitle'>${item.getTitle()}</span>
+                                                </button>
+                                            </div>
+                                            <div class='taskRightSide'>
+                                                <span class='taskDate'>${item.getDate()}</span>
+                                                <button class='btnTaskDelete'>X</button>
+                                            </div>
+                                        </div>`
+            index++;
+        }
+        // console.log(isToday(toDate(parseISO(item.getDate())), 'MM/dd/yyyy'));
+        // remove the task delete button here if cant figure out how to delete task while in default page
+    });
+}
+
+const displayDomTasksWeek = (defaultProject) => {
+    const todoListContainer = document.querySelector('#todoListContainer');
+    let index=0;
+    defaultProject.getTasks().forEach((item,index)=>{
+        // remove the task delete button here if cant figure out how to delete task while in default page
+        console.log(isThisWeek(toDate(parseISO(item.getDate())), 'MM/dd/yyyy'));
+        if (isThisWeek(toDate(parseISO(item.getDate())), 'MM/dd/yyyy')){
+            console.log(`this week! ${item.getDate()}`);
+        }
+        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+                                            <div class='taskLeftSide'>
+                                                <input type='checkbox' class='taskCheckbox'>
+                                                <button class='btnTaskDetails'>
+                                                    <span class='taskTitle'>${item.getTitle()}</span>
+                                                </button>
+                                            </div>
+                                            <div class='taskRightSide'>
+                                                <span class='taskDate'>${item.getDate()}</span>
+                                                <button class='btnTaskDelete'>X</button>
+                                            </div>
+                                        </div>`
+    });
+}
+
+const displayDomTasksDefault = (defaultProject) => {
     // add to Dom
     const todoListContainer = document.querySelector('#todoListContainer');
     defaultProject.getTasks().forEach((item,index)=>{
@@ -177,4 +232,4 @@ const displayDomTasksDefault = (projectList, defaultProject) => {
     });
 }
 
-export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, displayDomTasks, displayDomTasksDefault}
+export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek}

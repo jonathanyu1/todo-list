@@ -1,7 +1,7 @@
 import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks, displayDomTasksDefault } from './dom.js'
+import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek } from './dom.js'
 
 
 // * Things Left to do: *     
@@ -28,11 +28,15 @@ console.log('hello');
 // chores.sayHello();
 // console.log(chores.getName);
 
+// const today =format(new Date(),'MM/dd/yyyy');
+// console.log(today);
+
 const siteFlow = (()=>{
     // const inbox = project('inbox');
 
     let projectList = [];
-    const defaultProject = project('defaultProject');
+    const defaultProject = project('Default');
+   
 
     const alertEmptyName = () => {
         alert('You must include a name!');
@@ -91,13 +95,21 @@ const siteFlow = (()=>{
                 switch (defProj.id){
                     case 'default':
                         console.log(defProj.id+'switch');
-                        displayDomTasksDefault(projectList, defaultProject);
+                        addTasksDefault(projectList, defaultProject);
+                        displayDomTasksDefault(defaultProject);
+                        changeProjectTitle(defaultProject.getName());
                         break;
                     case 'today':
                         console.log(defProj.id+'switch');
+                        addTasksDefault(projectList, defaultProject);
+                        displayDomTasksToday(defaultProject);
+                        changeProjectTitle('Today');
                         break;
                     case 'thisWeek':
                         console.log(defProj.id+'switch');
+                        addTasksDefault(projectList, defaultProject);
+                        displayDomTasksWeek(defaultProject);
+                        changeProjectTitle('This Week');
                         break;    
                 }
             });
@@ -132,8 +144,6 @@ const siteFlow = (()=>{
             if (task.getProject()===item.getName()){
                 item.addTask(task);
             }
-            console.log(item.getName());
-            console.log(item.getTasks());
         });
     }
 
