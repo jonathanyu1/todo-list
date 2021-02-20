@@ -24,6 +24,10 @@ const project = (name) => {
 
     }
 
+    const clearTasks = () =>{
+        tasksList.splice(0,tasksList.length);
+    }
+
     const getTasks = () => tasksList;
 
     const getTask = (taskName) =>{
@@ -43,7 +47,8 @@ const project = (name) => {
         getTasks,
         getTask,
         sayHello,
-        sortTasksByDate
+        sortTasksByDate,
+        clearTasks
     }
 }
 

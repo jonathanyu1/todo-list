@@ -220,3 +220,8 @@ body{
     width: 300px;
 }
 
+#descriptionInput{
+    margin-top: 10px;
+    min-height: 50px;
+}
+

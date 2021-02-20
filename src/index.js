@@ -1,18 +1,18 @@
 import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks } from './dom.js'
+import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown, displayDomTasks, displayDomTasksDefault } from './dom.js'
 
 
 // * Things Left to do: *     
 // - functionality of clicking inbox, today, this week
-// - functionality of clicking tasks to reveal details
+// - functionality of clicking tasks to reveal details / edit details
 // - functionality of deleting project, including its tasks
 // - functionality of deleting tasks
-// - functionality of editing tasks
 // - styling 
 // - fix date bug with timezone
 // - set default value of date picker to today
+
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
 // const dates = [
@@ -32,6 +32,7 @@ const siteFlow = (()=>{
     // const inbox = project('inbox');
 
     let projectList = [];
+    const defaultProject = project('defaultProject');
 
     const alertEmptyName = () => {
         alert('You must include a name!');
@@ -80,6 +81,28 @@ const siteFlow = (()=>{
         // display tasks
         displayTasks(currProject);
     }
+    
+    const defaultProjectEventListener = (() => {
+        // Default, Today, This Week
+        const defaultProjects = document.querySelectorAll('.defaultProject');
+        defaultProjects.forEach((defProj)=>{
+            console.log(defProj.id);
+            defProj.addEventListener('click',()=>{
+                switch (defProj.id){
+                    case 'default':
+                        console.log(defProj.id+'switch');
+                        displayDomTasksDefault(projectList, defaultProject);
+                        break;
+                    case 'today':
+                        console.log(defProj.id+'switch');
+                        break;
+                    case 'thisWeek':
+                        console.log(defProj.id+'switch');
+                        break;    
+                }
+            });
+        });    
+    })();
 
     const projectEventListener = () => {
         const btnProjects = document.querySelectorAll('.btnProject');
@@ -133,10 +156,12 @@ const siteFlow = (()=>{
         displayTasks(currProject);
     }
 
-    const defaultProjectInit = (() => {
+    const inboxProjectInit = (() => {
         addProject('Inbox');
+        addProjectDom('Inbox');
+        projectEventListener();
         // add event listener for inbox
-        
+
     })();
 
     const updateProjectDropdown = () => {

@@ -141,4 +141,40 @@ const displayDomTasks = (projectObject) => {
     });
 }
 
-export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, displayDomTasks}
+const displayDomTasksDefault = (projectList, defaultProject) => {
+    // let defaultTasks = [];
+    clearDomTasks();
+    // clear defaultProject's tasks
+    defaultProject.clearTasks();
+    // set title to 'default'
+    console.log(defaultProject.getName());
+    changeProjectTitle(defaultProject.getName());
+    // add all tasks into defaultProject's tasks
+    projectList.forEach((projectObject)=>{
+        projectObject.getTasks().forEach((item)=>{
+            // defaultTasks.push(item);
+            defaultProject.addTask(item);
+        });
+    });
+    // sort
+    defaultProject.sortTasksByDate();
+    // add to Dom
+    const todoListContainer = document.querySelector('#todoListContainer');
+    defaultProject.getTasks().forEach((item,index)=>{
+        // remove the task delete button here if cant figure out how to delete task while in default page
+        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+                                            <div class='taskLeftSide'>
+                                                <input type='checkbox' class='taskCheckbox'>
+                                                <button class='btnTaskDetails'>
+                                                    <span class='taskTitle'>${item.getTitle()}</span>
+                                                </button>
+                                            </div>
+                                            <div class='taskRightSide'>
+                                                <span class='taskDate'>${item.getDate()}</span>
+                                                <button class='btnTaskDelete'>X</button>
+                                            </div>
+                                        </div>`
+    });
+}
+
+export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, displayDomTasks, displayDomTasksDefault}
