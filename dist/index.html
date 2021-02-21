@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
+    <meta charset = "UTF-8" />
     <title>Todo List</title>
     <link rel='stylesheet' href='styles.css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -47,9 +47,9 @@
       </div>
 
       <div id='formContainer' class='hideContent'>
-        <form class='formPopup' id= 'formPopup'>
+        <form class='formPopup' id= 'formPopup' action=''>
           <p class='formHeader'>New Task</p>
-          <input class='formInput' type='text' placeholder='Title' id='titleInput' required/>
+          <input name='titleInput' class='formInput' type='text' placeholder='Title' id='titleInput' required/>
           <textarea placeholder='Description' id='descriptionInput'></textarea>
           <!--
           <input class='formInput' type='text' placeholder='Description' id='descriptionInput' required>
@@ -65,7 +65,7 @@
           <select id='taskProject' name='taskProject'>
               <option value='inbox'>inbox</option>
           </select>
-          <button class='btnAddTask' form='formContainer' type='submit' id='btnAddTask'>Add</button>
+          <button class='btnAddTask' form='formContainer' type='button' id='btnAddTask'>Add</button>
           <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
         </form>
       </div>

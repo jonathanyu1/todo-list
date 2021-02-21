@@ -2,6 +2,14 @@ import { project } from "./project";
 import { task } from "./task";
 import { format, compareAsc, isToday, isThisWeek, parseISO,toDate } from 'date-fns'
 
+const requiredFieldAdd = (field) => {
+    field.classList.add('requiredField');
+}
+
+const requiredFieldRemove = (field) => {
+    field.classList.remove('requiredField');
+}
+
 const openTaskForm = () => {
     document.getElementById('formContainer').classList.remove('hideContent');
     document.getElementById('formPopup').reset();
@@ -229,4 +237,4 @@ const displayDomTasksDefault = (defaultProject) => {
     });
 }
 
-export {openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek}
+export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek}

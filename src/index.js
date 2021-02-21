@@ -1,7 +1,7 @@
 import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { project } from './project.js';
 import { task } from './task.js';
-import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek } from './dom.js'
+import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek } from './dom.js'
 
 
 // * Things Left to do: *     
@@ -11,7 +11,6 @@ import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProj
 // - functionality of deleting tasks
 // - styling 
 // - set default value of date picker to today
-// - fix 'required' fields
 
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
@@ -233,12 +232,34 @@ const siteFlow = (()=>{
     const btnAddTask = document.querySelector('.btnAddTask');
     btnAddTask.addEventListener('click', ()=>{
         // need to add check to prevent same title tasks
-        addTask();
-        closeTaskForm();
+        console.log('date: '+document.querySelector('#taskDueDate').value);
+        const titleInput = document.querySelector('#titleInput');
+        const taskDueDate = document.querySelector('#taskDueDate');
+        
+        if ((!taskDueDate.value) && (!titleInput.value)){
+            console.log('empty date and title');
+            requiredFieldAdd(taskDueDate);
+            requiredFieldAdd(titleInput);
+        }else if (!taskDueDate.value){
+            console.log('empty date!');
+            requiredFieldAdd(taskDueDate);
+            requiredFieldRemove(titleInput);
+        } else if (!titleInput.value){
+            console.log('empty title!');;
+            requiredFieldAdd(titleInput);
+            requiredFieldRemove(taskDueDate);
+        } else{
+            requiredFieldRemove(titleInput);
+            requiredFieldRemove(taskDueDate);
+            addTask();
+            closeTaskForm();
+        }
     });
 
     const btnCancelForm = document.querySelector('#btnCloseForm');
     btnCancelForm.addEventListener('click', ()=>{
+        requiredFieldRemove(titleInput);
+        requiredFieldRemove(taskDueDate);
         closeTaskForm();
     });
 
