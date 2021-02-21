@@ -5,12 +5,11 @@ import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProj
 
 
 // * Things Left to do: *     
-// - functionality of clicking inbox, today, this week
+
 // - functionality of clicking tasks to reveal details / edit details
 // - functionality of deleting project, including its tasks
 // - functionality of deleting tasks
 // - styling 
-// - fix date bug with timezone
 // - set default value of date picker to today
 
 
@@ -154,9 +153,14 @@ const siteFlow = (()=>{
         const taskProject = document.querySelector('#taskProject');
         const taskPriority = document.querySelector('#taskPriority');
         console.log(taskDueDate.value);
-        // this format bugs the date since it converts it into some timezone behind 1 day
-        // format(new Date(taskDueDate.value), 'MM/dd/yyyy')
-        const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
+        // format bugs the date since it converts it into some timezone behind 1 day
+        // solution to bug: https://stackoverflow.com/a/52352512
+        const newDate = new Date(taskDueDate.value);
+        const newDateOnly = new Date(newDate.valueOf() + newDate.getTimezoneOffset() * 60 * 1000);
+        console.log(format(newDate, 'MM/dd/yyyy')+' newDate');
+        console.log(format(newDateOnly, 'MM/dd/yyyy')+'newDateOnly');
+        const newTask = task(titleInput.value, descriptionInput.value, format(newDateOnly, 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
+        // const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
         // clear current displayed tasks

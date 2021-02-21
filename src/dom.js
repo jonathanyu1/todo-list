@@ -193,11 +193,14 @@ const displayDomTasksWeek = (defaultProject) => {
     let index=0;
     defaultProject.getTasks().forEach((item,index)=>{
         // remove the task delete button here if cant figure out how to delete task while in default page
-        console.log(isThisWeek(toDate(parseISO(item.getDate())), 'MM/dd/yyyy'));
-        if (isThisWeek(toDate(parseISO(item.getDate())), 'MM/dd/yyyy')){
+
+        // solution to bug: https://stackoverflow.com/a/52352512
+        const newDate = new Date(item.getDate());
+        const newDateOnly = new Date(newDate.valueOf() + newDate.getTimezoneOffset() * 60 * 1000);
+        console.log(isThisWeek(newDateOnly));
+        if (isThisWeek(newDateOnly)){
             console.log(`this week! ${item.getDate()}`);
-        }
-        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+            todoListContainer.innerHTML += `<div class='task' data-index=${index}>
                                             <div class='taskLeftSide'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -209,6 +212,8 @@ const displayDomTasksWeek = (defaultProject) => {
                                                 <button class='btnTaskDelete'>X</button>
                                             </div>
                                         </div>`
+            index++;
+        } 
     });
 }
 
