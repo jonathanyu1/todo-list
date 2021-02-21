@@ -11,6 +11,7 @@ import { openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProj
 // - functionality of deleting tasks
 // - styling 
 // - set default value of date picker to today
+// - fix 'required' fields
 
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');

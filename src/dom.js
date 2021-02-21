@@ -26,23 +26,14 @@ const closeProjectForm = () => {
 const addProjectDom = (projectName) => {
     // creates a button with li tag wrapped around it, appends to 'projectList' node
     const projectList = document.getElementById('projectList');
-    // let newListProject = document.createElement('li');
-    // let newProject = document.createElement('button');
-    // newProject.classList.add('btnProject');
-    // newProject.innerHTML = projectName;
-    // newListProject.appendChild(newProject);
-    // projectList.appendChild(newListProject);
-
-    // projectList.innerHTML += `<li><div class='project'>
-    //                             <button class='btnProjectLeftSide'>
-    //                                 <i class='material-icons'>assignment</i>
-    //                                 <span class='projectName'>${projectName}</span>
-    //                             </button>
-    //                             <button class='btnProjectRightSide'>
-    //                                 <i class='material-icons'>delete</i>
-    //                             </button>
-    //                         </div></li>`
-
+    if (projectName=='Inbox'){
+        projectList.innerHTML += `<li><button class='btnProject'>
+                                    <div class='projectLeftSide'>
+                                        <i class='material-icons'>assignment</i>
+                                        <span class='projectName'>${projectName}</span>
+                                    </div>
+                                </button></li>`
+    } else{
     projectList.innerHTML += `<li><button class='btnProject'>
                                     <div class='projectLeftSide'>
                                         <i class='material-icons'>assignment</i>
@@ -50,6 +41,7 @@ const addProjectDom = (projectName) => {
                                     </div>
                                     <i class='material-icons'>delete</i>
                                 </button></li>`
+    }
     // add left right side, delete button
 }
 
