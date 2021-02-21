@@ -20,6 +20,11 @@ body{
     display: none;
 }
 
+.requiredField{
+    border: 1px solid red;
+}
+
+
 .bodyContainer{
     display: grid;
     grid-template-columns: 15% auto;
