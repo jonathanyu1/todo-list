@@ -320,7 +320,10 @@ const siteFlow = (()=>{
             projectList.forEach((projectObject)=>{
                 addProjectDom(projectObject.getName());
             });
+            projectEventListener();
             // refresh current displayed tasklist
+            const currDisplayProject = document.querySelector('#todoProjectTitle').innerHTML;
+            document.querySelector('.defaultProject').click();
         }
       });
 })();
