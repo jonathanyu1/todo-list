@@ -2,12 +2,11 @@ import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid';
 import { project } from './project.js';
 import { task } from './task.js';
-import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
+import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom,clearDomProjects, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
 
 
 // * Things Left to do: *     
 
-// - functionality of deleting tasks
 // - functionality of clicking tasks to reveal details / edit details
 // - functionality of deleting project, including its tasks
 // - styling 
@@ -271,10 +270,10 @@ const siteFlow = (()=>{
             let projectObj = '';
             console.log('task delete');
             console.log(event.target);
+            // need to edit this if structure of task tree changes
             const taskUUID = event.target.parentNode.parentNode.dataset.uuid;
             console.log(taskUUID);
             // delete task from project, clear current DOM tasks, display DOM tasks
-            // const todoProjectTitle = document.querySelector('#todoProjectTitle');
             projectList.forEach((projectObject)=>{
                 projectObject.getTasks().forEach((item, index)=>{
                     if (item.getUUID()===taskUUID){
@@ -302,5 +301,26 @@ const siteFlow = (()=>{
                 displayDomTasks(projectObj);
             }
         };
+        // clicking 'delete button' for projects
+        console.log(event.target);
+        console.log(event.target.id);
+        if (event.target.id==='projectDelete'){
+            console.log('delete project time');
+            console.log(event.target.parentNode);
+            console.log(event.target.parentNode.getElementsByClassName('projectName')[0].innerHTML);
+            const projectDeleteName = event.target.parentNode.getElementsByClassName('projectName')[0].innerHTML;
+            projectList.forEach((projectObject,index)=>{
+                if (projectObject.getName()===projectDeleteName){
+                    projectList.splice(index,1);
+                }
+            });
+            // clear project List
+            clearDomProjects();
+            // display new project List
+            projectList.forEach((projectObject)=>{
+                addProjectDom(projectObject.getName());
+            });
+            // refresh current displayed tasklist
+        }
       });
 })();

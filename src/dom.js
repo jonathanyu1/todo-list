@@ -47,7 +47,7 @@ const addProjectDom = (projectName) => {
                                         <i class='material-icons'>assignment</i>
                                         <span class='projectName'>${projectName}</span>
                                     </div>
-                                    <i class='material-icons'>delete</i>
+                                    <i class='material-icons' id='projectDelete'>delete</i>
                                 </button></li>`
     }
     // add left right side, delete button
@@ -65,6 +65,12 @@ const updateDomProjectDropdown = (projectName) => {
     taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
 }
 
+const clearDomProjects = () => {
+    const projectListContainer = document.querySelector('#projectList');
+    while (projectListContainer.lastChild){
+        projectListContainer.removeChild(projectListContainer.lastChild);
+    }
+}
 
 const clearDomTasks = () => {
     const todoListContainer = document.querySelector('#todoListContainer');
@@ -116,7 +122,6 @@ function compare(a,b){
 // }
 
 const displayDomTasks = (projectObject) => {
-    // tasks.sort(compare);
     projectObject.sortTasksByDate();
     changeProjectTitle(projectObject.getName());
     clearDomTasks();
@@ -242,8 +247,8 @@ const displayDomTasksDefault = (defaultProject) => {
 const displayDomTasksPointer = () => {
     const todoProjectTitle = document.querySelector('#todoProjectTitle');
     if (todoProjectTitle.innerHTML==='Default'){
-        
+
     }
 }
 
-export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}
+export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, clearDomProjects,updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}
