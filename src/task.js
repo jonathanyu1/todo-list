@@ -3,7 +3,13 @@ import { format, compareAsc } from 'date-fns'
 // format(new Date(2014, 1, 11), 'MM/dd/yyyy')
 // use this for date 
 
-const task = (title, description, dueDate, priority, project) =>{
+const task = (title, description, dueDate, priority, project, UUID) =>{
+
+    const getUUID = () => UUID;
+
+    const setUUID = (newUUID) => {
+        UUID=newUUID;
+    }
 
     const getTitle = () => title;
 
@@ -42,6 +48,8 @@ const task = (title, description, dueDate, priority, project) =>{
     }
 
     return {
+        getUUID,
+        setUUID,
         getTitle,
         setTitle,
         getDate,

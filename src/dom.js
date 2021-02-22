@@ -126,7 +126,7 @@ const displayDomTasks = (projectObject) => {
         console.log(item.getDate());
         console.log(typeof(item.getDate()));
         console.log('index= '+index);
-        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+        todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -169,7 +169,7 @@ const displayDomTasksToday = (defaultProject) => {
     defaultProject.getTasks().forEach((item)=>{
         if (checkToday(item.getDate())){
             console.log(`today! ${item.getTitle()}`);
-            todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+            todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -200,7 +200,7 @@ const displayDomTasksWeek = (defaultProject) => {
         console.log(isThisWeek(newDateOnly));
         if (isThisWeek(newDateOnly)){
             console.log(`this week! ${item.getDate()}`);
-            todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+            todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -222,7 +222,7 @@ const displayDomTasksDefault = (defaultProject) => {
     const todoListContainer = document.querySelector('#todoListContainer');
     defaultProject.getTasks().forEach((item,index)=>{
         // remove the task delete button here if cant figure out how to delete task while in default page
-        todoListContainer.innerHTML += `<div class='task' data-index=${index}>
+        todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>

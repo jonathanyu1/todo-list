@@ -1,4 +1,5 @@
 import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
+import { v4 as uuidv4 } from 'uuid';
 import { project } from './project.js';
 import { task } from './task.js';
 import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek } from './dom.js'
@@ -21,7 +22,8 @@ import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, ope
 // ];
 // dates.sort(compareAsc);
 // console.log(dates);
-
+console.log(uuidv4());
+console.log(uuidv4());
 console.log('hello');
 // const chores = project('chores');
 // chores.sayHello();
@@ -152,14 +154,16 @@ const siteFlow = (()=>{
         const taskDueDate = document.querySelector('#taskDueDate');
         const taskProject = document.querySelector('#taskProject');
         const taskPriority = document.querySelector('#taskPriority');
+        const UUID = uuidv4();
         console.log(taskDueDate.value);
+        console.log(UUID+ ' task UUID');
         // format bugs the date since it converts it into some timezone behind 1 day
         // solution to bug: https://stackoverflow.com/a/52352512
         const newDate = new Date(taskDueDate.value);
         const newDateOnly = new Date(newDate.valueOf() + newDate.getTimezoneOffset() * 60 * 1000);
         console.log(format(newDate, 'MM/dd/yyyy')+' newDate');
         console.log(format(newDateOnly, 'MM/dd/yyyy')+'newDateOnly');
-        const newTask = task(titleInput.value, descriptionInput.value, format(newDateOnly, 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
+        const newTask = task(titleInput.value, descriptionInput.value, format(newDateOnly, 'MM/dd/yyyy'), taskPriority.value, taskProject.value, UUID);
         // const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
