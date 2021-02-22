@@ -142,7 +142,6 @@ const displayDomTasks = (projectObject) => {
 }
 
 const addTasksDefault = (projectList, defaultProject) => {
-    clearDomTasks();
     // clear defaultProject's tasks
     defaultProject.clearTasks();
     // add all tasks into defaultProject's tasks
@@ -166,6 +165,7 @@ function checkToday (taskDate){
 const displayDomTasksToday = (defaultProject) => {
     const todoListContainer = document.querySelector('#todoListContainer');
     let index=0;
+    clearDomTasks();
     defaultProject.getTasks().forEach((item)=>{
         if (checkToday(item.getDate())){
             console.log(`today! ${item.getTitle()}`);
@@ -191,6 +191,7 @@ const displayDomTasksToday = (defaultProject) => {
 const displayDomTasksWeek = (defaultProject) => {
     const todoListContainer = document.querySelector('#todoListContainer');
     let index=0;
+    clearDomTasks();
     defaultProject.getTasks().forEach((item,index)=>{
         // remove the task delete button here if cant figure out how to delete task while in default page
 
@@ -218,6 +219,7 @@ const displayDomTasksWeek = (defaultProject) => {
 }
 
 const displayDomTasksDefault = (defaultProject) => {
+    clearDomTasks();
     // add to Dom
     const todoListContainer = document.querySelector('#todoListContainer');
     defaultProject.getTasks().forEach((item,index)=>{
@@ -237,4 +239,11 @@ const displayDomTasksDefault = (defaultProject) => {
     });
 }
 
-export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek}
+const displayDomTasksPointer = () => {
+    const todoProjectTitle = document.querySelector('#todoProjectTitle');
+    if (todoProjectTitle.innerHTML==='Default'){
+        
+    }
+}
+
+export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}

@@ -2,14 +2,14 @@ import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid';
 import { project } from './project.js';
 import { task } from './task.js';
-import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek } from './dom.js'
+import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
 
 
 // * Things Left to do: *     
 
+// - functionality of deleting tasks
 // - functionality of clicking tasks to reveal details / edit details
 // - functionality of deleting project, including its tasks
-// - functionality of deleting tasks
 // - styling 
 // - set default value of date picker to today
 
@@ -71,12 +71,6 @@ const siteFlow = (()=>{
     const displayProject = (projectName) => {
         // get corresponding project object
         let currProject = selectCurrentProject(projectName);
-        // projectList.forEach(item=>{
-        //     console.log(item.getName() + ' get name');
-        //     if (item.getName() === projectName){
-        //         currProject = item;
-        //     }
-        // });
         console.log(currProject);
         // set title
         const todoProjectTitle = document.querySelector('#todoProjectTitle');
@@ -214,8 +208,10 @@ const siteFlow = (()=>{
         // prevent empty name for project
         if (projectName.value===''){
             alertEmptyName();
-        }else if(projectList.find(checkSameNameProject)) {
+        }else if(projectList.find(checkSameNameProject)||projectName.value==='Default' || projectName.value==='Today' || projectName.value==='This Week') {
             alertSameName();
+        // } else if (projectName.value==='Default' || projectName.value==='Today' || projectName.value==='This Week'){
+        //     alertSameName();
         } else{
             addProject(projectName.value);
             addProjectDom(projectName.value);
@@ -267,4 +263,44 @@ const siteFlow = (()=>{
         closeTaskForm();
     });
 
+    
+    document.body.addEventListener( 'click', function (event) {
+        // clicking 'delete button' for tasks
+        if (event.target.className=='btnTaskDelete'){
+            const todoProjectTitle = document.querySelector('#todoProjectTitle');
+            let projectObj = '';
+            console.log('task delete');
+            console.log(event.target);
+            const taskUUID = event.target.parentNode.parentNode.dataset.uuid;
+            console.log(taskUUID);
+            // delete task from project, clear current DOM tasks, display DOM tasks
+            // const todoProjectTitle = document.querySelector('#todoProjectTitle');
+            projectList.forEach((projectObject)=>{
+                projectObject.getTasks().forEach((item, index)=>{
+                    if (item.getUUID()===taskUUID){
+                        console.log(item.getUUID());
+                        console.log(item.getTitle());
+                        console.log(item.getDate());
+                        console.log(item.getProject());
+                        console.log(projectObject.getName());
+                        console.log(index);
+                        projectObject.deleteTask(index);
+                        projectObj = projectObject;
+                    }
+                });
+            });
+            if (todoProjectTitle.innerHTML ==='Default'){
+                addTasksDefault(projectList, defaultProject);
+                displayDomTasksDefault(defaultProject);
+            } else if (todoProjectTitle.innerHTML ==='Today'){
+                addTasksDefault(projectList, defaultProject);
+                displayDomTasksToday(defaultProject);
+            } else if (todoProjectTitle.innerHTML ==='This Week'){
+                addTasksDefault(projectList, defaultProject);
+                displayDomTasksWeek(defaultProject);
+            } else {
+                displayDomTasks(projectObj);
+            }
+        };
+      });
 })();

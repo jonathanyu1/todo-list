@@ -1,3 +1,5 @@
+import { task } from "./task";
+
 const project = (name) => {
     let tasksList = [];
 
@@ -20,8 +22,8 @@ const project = (name) => {
     const addTask = (task) =>{
         tasksList.push(task);
     }
-    const deleteTask = (task) =>{
-
+    const deleteTask = (taskIndex) =>{
+        tasksList.splice(taskIndex, 1);
     }
 
     const clearTasks = () =>{
