@@ -46,18 +46,18 @@
           New Task</button>
       </div>
 
-      <div id='formContainer' class='hideContent'>
+      <div id='formContainer' class='formContainer hideContent'>
         <form class='formPopup' id= 'formPopup' action=''>
           <p class='formHeader'>New Task</p>
           <div class='titleInputContainer'>
             <label for='titleInput'>Title: </label>
-            <input id='titleInput' class='formInput' name='titleInput' type='text' placeholder='Title' maxlength='16' required/>
+            <input class='titleInput' id='titleInput' class='formInput' name='titleInput' type='text' placeholder='Title' maxlength='16' required/>
           </div>
-          <textarea placeholder='Description' id='descriptionInput'></textarea>
-          <input type="date" id="taskDueDate" required/>
+          <textarea placeholder='Description' class='descriptionInput' id='descriptionInput'></textarea>
+          <input type="date" class='taskDueDate' id="taskDueDate" required/>
           <div class='taskPriorityContainer'>
             <label for='taskPriority'>Choose a priority:</label>
-            <select id='taskPriority' name='taskPriority'>
+            <select class='taskPriority' id='taskPriority' name='taskPriority'>
                 <option value='low'>Low</option>
                 <option value='medium'>Medium</option>
                 <option value='high'>High</option>
@@ -65,7 +65,7 @@
           </div>
           <div class='taskProjectContainer'>
             <label for='taskProject'>Choose a project:</label>
-            <select id='taskProject' name='taskProject'>
+            <select class='taskProject' id='taskProject' name='taskProject'>
                 <option value='inbox'>inbox</option>
             </select>
           </div>
