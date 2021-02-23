@@ -94,33 +94,6 @@ function compare(a,b){
     return 0;
 }
 
-// const displayDomTasks = (tasks,projectName) => {
-//     // tasks.sort((a,b)=>a.getDate()>b.getDate());
-//     // https://stackoverflow.com/a/1129270
-//     tasks.sort(compare);
-//     const todoListContainer = document.querySelector('#todoListContainer');
-//     changeProjectTitle(projectName);
-//     clearDomTasks();
-//     tasks.forEach((item,index)=>{
-//         console.log(item.getTitle());
-//         console.log(item.getDate());
-//         console.log(typeof(item.getDate()));
-//         console.log('index= '+index);
-//         todoListContainer.innerHTML += `<div class='task' data-index=${index}>
-//                                             <div class='taskLeftSide'>
-//                                                 <input type='checkbox' class='taskCheckbox'>
-//                                                 <button class='btnTaskDetails'>
-//                                                     <span class='taskTitle'>${item.getTitle()}</span>
-//                                                 </button>
-//                                             </div>
-//                                             <div class='taskRightSide'>
-//                                                 <span class='taskDate'>${item.getDate()}</span>
-//                                                 <button class='btnTaskDelete'>X</button>
-//                                             </div>
-//                                         </div>`
-//     });
-// }
-
 const displayDomTasks = (projectObject) => {
     projectObject.sortTasksByDate();
     changeProjectTitle(projectObject.getName());
@@ -132,7 +105,7 @@ const displayDomTasks = (projectObject) => {
         console.log(typeof(item.getDate()));
         console.log('index= '+index);
         todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
-                                            <div class='taskLeftSide'>
+                                            <div class='taskLeftSide ${item.getPriority()}Priority' >
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
                                                     <span class='taskTitle'>${item.getTitle()}</span>
@@ -175,7 +148,7 @@ const displayDomTasksToday = (defaultProject) => {
         if (checkToday(item.getDate())){
             console.log(`today! ${item.getTitle()}`);
             todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
-                                            <div class='taskLeftSide'>
+                                            <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
                                                     <span class='taskTitle'>${item.getTitle()}</span>
@@ -207,7 +180,7 @@ const displayDomTasksWeek = (defaultProject) => {
         if (isThisWeek(newDateOnly)){
             console.log(`this week! ${item.getDate()}`);
             todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
-                                            <div class='taskLeftSide'>
+                                            <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
                                                     <span class='taskTitle'>${item.getTitle()}</span>
@@ -230,7 +203,7 @@ const displayDomTasksDefault = (defaultProject) => {
     defaultProject.getTasks().forEach((item,index)=>{
         // remove the task delete button here if cant figure out how to delete task while in default page
         todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
-                                            <div class='taskLeftSide'>
+                                            <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
                                                     <span class='taskTitle'>${item.getTitle()}</span>

@@ -8,9 +8,9 @@ import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, ope
 // * Things Left to do: *     
 
 // - functionality of clicking tasks to reveal details / edit details
-// - functionality of deleting project, including its tasks
 // - styling 
 // - set default value of date picker to today
+// - local storage
 
 
 // format(new Date(2021, 2, 15), 'MM/dd/yyyy');
