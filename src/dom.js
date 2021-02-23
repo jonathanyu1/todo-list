@@ -159,7 +159,6 @@ const addTasksDefault = (projectList, defaultProject) => {
     // add all tasks into defaultProject's tasks
     projectList.forEach((projectObject)=>{
         projectObject.getTasks().forEach((item)=>{
-            // defaultTasks.push(item);
             defaultProject.addTask(item);
         });
     });
@@ -195,8 +194,6 @@ const displayDomTasksToday = (defaultProject) => {
                                         </div>`
             index++;
         }
-        // console.log(isToday(toDate(parseISO(item.getDate())), 'MM/dd/yyyy'));
-        // remove the task delete button here if cant figure out how to delete task while in default page
     });
 }
 
@@ -205,8 +202,6 @@ const displayDomTasksWeek = (defaultProject) => {
     let index=0;
     clearDomTasks();
     defaultProject.getTasks().forEach((item,index)=>{
-        // remove the task delete button here if cant figure out how to delete task while in default page
-
         // solution to bug: https://stackoverflow.com/a/52352512
         const newDate = new Date(item.getDate());
         const newDateOnly = new Date(newDate.valueOf() + newDate.getTimezoneOffset() * 60 * 1000);
@@ -235,7 +230,6 @@ const displayDomTasksDefault = (defaultProject) => {
     // add to Dom
     const todoListContainer = document.querySelector('#todoListContainer');
     defaultProject.getTasks().forEach((item,index)=>{
-        // remove the task delete button here if cant figure out how to delete task while in default page
         todoListContainer.innerHTML += `<div class='task' data-description='${item.getDescription()}' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
@@ -251,11 +245,6 @@ const displayDomTasksDefault = (defaultProject) => {
     });
 }
 
-const displayDomTasksPointer = () => {
-    const todoProjectTitle = document.querySelector('#todoProjectTitle');
-    if (todoProjectTitle.innerHTML==='Default'){
 
-    }
-}
 
-export {requiredFieldAdd, requiredFieldRemove,setEditTaskForm, openEditTaskForm, closeEditTaskForm,openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, clearDomProjects,updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}
+export {requiredFieldAdd, requiredFieldRemove,setEditTaskForm, openEditTaskForm, closeEditTaskForm,openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, clearDomProjects,updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek}

@@ -2,32 +2,12 @@ import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid';
 import { project } from './project.js';
 import { task } from './task.js';
-import { requiredFieldAdd, requiredFieldRemove, setEditTaskForm, openEditTaskForm, closeEditTaskForm, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom,clearDomProjects, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
+import { requiredFieldAdd, requiredFieldRemove, setEditTaskForm, openEditTaskForm, closeEditTaskForm, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom,clearDomProjects, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek} from './dom.js'
 
 
 // * Things Left to do: *     
 
-// - styling 
 // - local storage
-
-
-// format(new Date(2021, 2, 15), 'MM/dd/yyyy');
-// const dates = [
-//     new Date(1995, 6, 2),
-//     new Date(1987, 1, 11),
-//     new Date(1989, 6, 10),
-// ];
-// dates.sort(compareAsc);
-// console.log(dates);
-console.log(uuidv4());
-console.log(uuidv4());
-console.log('hello');
-// const chores = project('chores');
-// chores.sayHello();
-// console.log(chores.getName);
-
-// const today =format(new Date(),'MM/dd/yyyy');
-// console.log(today);
 
 const siteFlow = (()=>{
     // const inbox = project('inbox');
@@ -60,10 +40,6 @@ const siteFlow = (()=>{
     }
 
     const displayTasks = (currProject) => {
-        // const tasks = currProject.getTasks();
-        // console.log(tasks);
-        // console.log('tasks of ' + currProject.getName());
-        // displayDomTasks(tasks, currProject.getName());
         displayDomTasks(currProject);
     }
 
@@ -74,8 +50,6 @@ const siteFlow = (()=>{
         // set title
         const todoProjectTitle = document.querySelector('#todoProjectTitle');
         todoProjectTitle.innerHTML = currProject.getName();
-        // clear current tasks
-        // clearDomCurrTasks();
         // display tasks
         displayTasks(currProject);
     }
@@ -120,11 +94,6 @@ const siteFlow = (()=>{
                 console.log('added');
                 displayProject(nameChild.innerHTML);
             });
-            // if (nameChild.innerHTML === projectName){
-            //     item.addEventListener('click', ()=>{
-            //         console.log('added');
-            //     });
-            // }
         })
     }
 
@@ -184,8 +153,6 @@ const siteFlow = (()=>{
         // const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
         console.log(newTask);
         addTaskToProject(newTask);
-        // clear current displayed tasks
-
         // display project
         let currProject = selectCurrentProject(taskProject.value);
         displayTasks(currProject);
@@ -233,8 +200,6 @@ const siteFlow = (()=>{
             alertEmptyName();
         }else if(projectList.find(checkSameNameProject)||projectName.value==='Default' || projectName.value==='Today' || projectName.value==='This Week') {
             alertSameName();
-        // } else if (projectName.value==='Default' || projectName.value==='Today' || projectName.value==='This Week'){
-        //     alertSameName();
         } else{
             addProject(projectName.value);
             addProjectDom(projectName.value);

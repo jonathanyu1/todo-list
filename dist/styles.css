@@ -159,11 +159,6 @@ button{
     grid-area: main;
     width: 800px;
     margin: 50px 25%;
-    /*
-    display: grid;
-    grid-template-rows: 50px auto;
-    grid-template-columns: 1fr;
-    */
 }
 
 #todoTitleContainer{
