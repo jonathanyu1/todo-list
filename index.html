@@ -49,25 +49,30 @@
       <div id='formContainer' class='hideContent'>
         <form class='formPopup' id= 'formPopup' action=''>
           <p class='formHeader'>New Task</p>
-          <label for='titleInput'>Title: </label>
-          <input id='titleInput' class='formInput' name='titleInput' type='text' placeholder='Title' maxlength='16' required/>
+          <div class='titleInputContainer'>
+            <label for='titleInput'>Title: </label>
+            <input id='titleInput' class='formInput' name='titleInput' type='text' placeholder='Title' maxlength='16' required/>
+          </div>
           <textarea placeholder='Description' id='descriptionInput'></textarea>
-          <!--
-          <input class='formInput' type='text' placeholder='Description' id='descriptionInput' required>
-          -->
           <input type="date" id="taskDueDate" required/>
-          <label for='taskPriority'>Choose a priority:</label>
-          <select id='taskPriority' name='taskPriority'>
-              <option value='low'>Low</option>
-              <option value='medium'>Medium</option>
-              <option value='high'>High</option>
-          </select>
-          <label for='taskProject'>Choose a project:</label>
-          <select id='taskProject' name='taskProject'>
-              <option value='inbox'>inbox</option>
-          </select>
-          <button class='btnAddTask' form='formContainer' type='button' id='btnAddTask'>Add</button>
-          <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
+          <div class='taskPriorityContainer'>
+            <label for='taskPriority'>Choose a priority:</label>
+            <select id='taskPriority' name='taskPriority'>
+                <option value='low'>Low</option>
+                <option value='medium'>Medium</option>
+                <option value='high'>High</option>
+            </select>
+          </div>
+          <div class='taskProjectContainer'>
+            <label for='taskProject'>Choose a project:</label>
+            <select id='taskProject' name='taskProject'>
+                <option value='inbox'>inbox</option>
+            </select>
+          </div>
+          <div class='formBtnContainer'>
+            <button class='btnAddTask' form='formContainer' type='button' id='btnAddTask'>Add</button>
+            <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
+          </div>
         </form>
       </div>
 
