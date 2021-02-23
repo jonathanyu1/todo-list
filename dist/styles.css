@@ -211,6 +211,10 @@ body{
     font-size: 15px;
 }
 
+.btnTaskDetails{
+    
+}
+
 .task span{
     
 }
@@ -238,7 +242,7 @@ body{
 
 /* task form */
 
-#formContainer{
+.formContainer{
     position: fixed;
     z-index:1;
     width:100%;

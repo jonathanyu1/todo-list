@@ -2,7 +2,7 @@ import { format, compareAsc, isToday, isThisWeek } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid';
 import { project } from './project.js';
 import { task } from './task.js';
-import { requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom,clearDomProjects, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
+import { requiredFieldAdd, requiredFieldRemove, setEditTaskForm, openEditTaskForm, closeEditTaskForm, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom,clearDomProjects, updateDomProjectDropdown, clearProjectDropdown,changeProjectTitle, displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer } from './dom.js'
 
 
 // * Things Left to do: *     
@@ -35,6 +35,8 @@ const siteFlow = (()=>{
     // const inbox = project('inbox');
 
     let projectList = [];
+    let currentEvent = '';
+
     const defaultProject = project('Default');
    
 
@@ -139,6 +141,30 @@ const siteFlow = (()=>{
                 item.addTask(task);
             }
         });
+    }
+
+    const addTaskEdit = () => {
+        const titleInput = document.querySelector('#titleInputEdit');
+        const descriptionInput = document.querySelector('#descriptionInputEdit');
+        const taskDueDate = document.querySelector('#taskDueDateEdit');
+        const taskProject = document.querySelector('#taskProjectEdit');
+        const taskPriority = document.querySelector('#taskPriorityEdit');
+        const UUID = uuidv4();
+        console.log(taskDueDate.value);
+        console.log(UUID+ ' task UUID');
+        // format bugs the date since it converts it into some timezone behind 1 day
+        // solution to bug: https://stackoverflow.com/a/52352512
+        const newDate = new Date(taskDueDate.value);
+        const newDateOnly = new Date(newDate.valueOf() + newDate.getTimezoneOffset() * 60 * 1000);
+        console.log(format(newDate, 'MM/dd/yyyy')+' newDate');
+        console.log(format(newDateOnly, 'MM/dd/yyyy')+'newDateOnly');
+        const newTask = task(titleInput.value, descriptionInput.value, format(newDateOnly, 'MM/dd/yyyy'), taskPriority.value, taskProject.value, UUID);
+        // const newTask = task(titleInput.value, descriptionInput.value, format(new Date(taskDueDate.value), 'MM/dd/yyyy'), taskPriority.value, taskProject.value);
+        console.log(newTask);
+        addTaskToProject(newTask);
+        // display project
+        let currProject = selectCurrentProject(taskProject.value);
+        displayTasks(currProject);
     }
 
     const addTask = () => {
@@ -262,16 +288,14 @@ const siteFlow = (()=>{
         closeTaskForm();
     });
 
-    
-    document.body.addEventListener( 'click', function (event) {
-        // clicking 'delete button' for tasks
-        if (event.target.className=='btnTaskDelete'){
-            const todoProjectTitle = document.querySelector('#todoProjectTitle');
+    function delTask (event){
+        const todoProjectTitle = document.querySelector('#todoProjectTitle');
             let projectObj = '';
             console.log('task delete');
             console.log(event.target);
             // need to edit this if structure of task tree changes
-            const taskUUID = event.target.parentNode.parentNode.dataset.uuid;
+            const taskUUID = event.target.closest('[data-uuid]').dataset.uuid;
+            //const taskUUID = event.target.parentNode.parentNode.dataset.uuid;
             console.log(taskUUID);
             // delete task from project, clear current DOM tasks, display DOM tasks
             projectList.forEach((projectObject)=>{
@@ -300,10 +324,14 @@ const siteFlow = (()=>{
             } else {
                 displayDomTasks(projectObj);
             }
+    }
+
+    document.body.addEventListener( 'click', function (event) {
+        // clicking 'delete button' for tasks
+        if (event.target.className=='btnTaskDelete'){
+            delTask(event);
         };
         // clicking 'delete button' for projects
-        console.log(event.target);
-        console.log(event.target.id);
         if (event.target.id==='projectDelete'){
             console.log('delete project time');
             console.log(event.target.parentNode);
@@ -324,6 +352,36 @@ const siteFlow = (()=>{
             // refresh current displayed tasklist
             const currDisplayProject = document.querySelector('#todoProjectTitle').innerHTML;
             document.querySelector('.defaultProject').click();
+        }
+        // click 'edit' button on task
+        console.log(event.target);
+        console.log(event.target.className);
+        console.log(event.target.id);
+        
+        if (event.target.className==='taskTitle'){
+            currentEvent = event;
+            updateProjectDropdown();
+            openEditTaskForm();
+            const uuid = currentEvent.target.closest('[data-uuid]').dataset.uuid;
+            setEditTaskForm(uuid, projectList);
+            const titleInputEdit = document.querySelector('#titleInputEdit');
+            requiredFieldRemove(titleInputEdit);
+        }
+        if (event.target.id==='btnEditTask'){
+            const titleInputEdit = document.querySelector('#titleInputEdit');
+            console.log(titleInputEdit.value + ' titleInputEdit Value');
+            if (!titleInputEdit.value){
+                requiredFieldAdd(titleInputEdit);
+            } else{
+            // delete current task
+            delTask(currentEvent);
+            // create new task with new details
+            addTaskEdit();
+            // need to check empty title
+            closeEditTaskForm();
+            }
+        } else if (event.target.id==='btnCloseFormEdit'){
+            closeEditTaskForm();
         }
       });
 })();

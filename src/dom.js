@@ -10,6 +10,34 @@ const requiredFieldRemove = (field) => {
     field.classList.remove('requiredField');
 }
 
+const setEditTaskForm = (uuid, projectList) => {
+    const titleInputEdit = document.querySelector('#titleInputEdit');
+    const descriptionInputEdit = document.querySelector('#descriptionInputEdit');
+    const taskDueDateEdit = document.querySelector('#taskDueDateEdit');
+    const taskPriorityEdit = document.querySelector('#taskPriorityEdit');
+    const taskProjectEdit = document.querySelector('#taskProjectEdit');
+    projectList.forEach((projectObject)=>{
+        projectObject.getTasks().forEach((item)=>{
+            if (item.getUUID()===uuid){
+                console.log('found '+uuid);
+                titleInputEdit.defaultValue = item.getTitle();
+                descriptionInputEdit.defaultValue = item.getDescription();
+                taskDueDateEdit.defaultValue = format(new Date(item.getDate()),'yyyy-MM-dd');
+                taskPriorityEdit.defaultValue = item.getPriority();
+                taskProjectEdit.defaultValue = item.getProject();
+            }
+        });
+    });
+}
+
+const openEditTaskForm = () => {
+    document.getElementById('formContainerEdit').classList.remove('hideContent');
+}
+
+const closeEditTaskForm = () => {
+    document.getElementById('formContainerEdit').classList.add('hideContent');
+}
+
 const openTaskForm = () => {
     document.getElementById('formContainer').classList.remove('hideContent');
     document.getElementById('formPopup').reset();
@@ -20,7 +48,7 @@ const closeTaskForm = () => {
 }
 
 const openProjectForm = () => {
-    // open form, hide add project button
+    // open form, hide 'add project' button
     document.getElementById('projectPopupContainer').classList.remove('hideContent');
     document.getElementById('newProject').classList.add('hideContent');
     document.getElementById('projectInputName').value='';
@@ -54,15 +82,21 @@ const addProjectDom = (projectName) => {
 }
 
 const clearProjectDropdown = () => {
-    const taskProject = document.querySelector('#taskProject');
+    const taskProject = document.querySelector('.taskProject');
     while (taskProject.lastChild){
         taskProject.removeChild(taskProject.lastChild);
+    }
+    const taskProjectEdit = document.querySelector('#taskProjectEdit');
+    while (taskProjectEdit.lastChild){
+        taskProjectEdit.removeChild(taskProjectEdit.lastChild);
     }
 }
 
 const updateDomProjectDropdown = (projectName) => {
     const taskProject = document.querySelector('#taskProject');
     taskProject.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
+    const taskProjectEdit = document.querySelector('#taskProjectEdit');
+    taskProjectEdit.innerHTML+=`<option value=${projectName}>${projectName}</option>`;
 }
 
 const clearDomProjects = () => {
@@ -104,7 +138,7 @@ const displayDomTasks = (projectObject) => {
         console.log(item.getDate());
         console.log(typeof(item.getDate()));
         console.log('index= '+index);
-        todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
+        todoListContainer.innerHTML += `<div class='task' data-description='${item.getDescription()}' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide ${item.getPriority()}Priority' >
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -147,7 +181,7 @@ const displayDomTasksToday = (defaultProject) => {
     defaultProject.getTasks().forEach((item)=>{
         if (checkToday(item.getDate())){
             console.log(`today! ${item.getTitle()}`);
-            todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
+            todoListContainer.innerHTML += `<div class='task' data-description='${item.getDescription()}' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -179,7 +213,7 @@ const displayDomTasksWeek = (defaultProject) => {
         console.log(isThisWeek(newDateOnly));
         if (isThisWeek(newDateOnly)){
             console.log(`this week! ${item.getDate()}`);
-            todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
+            todoListContainer.innerHTML += `<div class='task' data-description='${item.getDescription()}' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -202,7 +236,7 @@ const displayDomTasksDefault = (defaultProject) => {
     const todoListContainer = document.querySelector('#todoListContainer');
     defaultProject.getTasks().forEach((item,index)=>{
         // remove the task delete button here if cant figure out how to delete task while in default page
-        todoListContainer.innerHTML += `<div class='task' data-uuid=${item.getUUID()}>
+        todoListContainer.innerHTML += `<div class='task' data-description='${item.getDescription()}' data-uuid=${item.getUUID()}>
                                             <div class='taskLeftSide ${item.getPriority()}Priority'>
                                                 <input type='checkbox' class='taskCheckbox'>
                                                 <button class='btnTaskDetails'>
@@ -224,4 +258,4 @@ const displayDomTasksPointer = () => {
     }
 }
 
-export {requiredFieldAdd, requiredFieldRemove, openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, clearDomProjects,updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}
+export {requiredFieldAdd, requiredFieldRemove,setEditTaskForm, openEditTaskForm, closeEditTaskForm,openTaskForm, closeTaskForm, openProjectForm, closeProjectForm, addProjectDom, clearDomProjects,updateDomProjectDropdown,clearProjectDropdown, changeProjectTitle,displayDomTasks, displayDomTasksDefault,addTasksDefault,displayDomTasksToday,displayDomTasksWeek,displayDomTasksPointer}
