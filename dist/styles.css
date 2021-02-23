@@ -250,7 +250,7 @@ body{
 }
 
 .formPopup{
-    background-color: #D1EEEE;
+    background-color: rgba(255, 255, 255, 0.959);
     margin: 10% auto;
     padding: 20px;
     border: 2px solid #888;
@@ -272,14 +272,65 @@ body{
     font-size: 25px;
 }
 
+.titleInputContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#titleInput{
+    width: 80%;
+}
+
 #taskDueDate{
-    width: 300px;
+    width: 100%;
 }
 
 #descriptionInput{
     margin-top: 10px;
+    margin-bottom: 5px;
     min-height: 50px;
     width: 100%;
+}
+
+.taskPriorityContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#taskPriority{
+    width: 40%;
+}
+
+.taskProjectContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#taskProject{
+    width: 40%;
+}
+
+.formBtnContainer{
+    width: 100%;
+    text-align:center;
+}
+
+.formBtnContainer button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.btnAddTask{
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Edit task form */
