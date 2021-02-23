@@ -7,9 +7,7 @@ import { requiredFieldAdd, requiredFieldRemove, setEditTaskForm, openEditTaskFor
 
 // * Things Left to do: *     
 
-// - functionality of clicking tasks to reveal details / edit details
 // - styling 
-// - set default value of date picker to today
 // - local storage
 
 
