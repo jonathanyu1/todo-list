@@ -39,7 +39,7 @@ body{
 
 .bodyContainer{
     display: grid;
-    grid-template-columns: 15% auto;
+    grid-template-columns: 17% auto;
     grid-template-rows: 8% auto;
     grid-template-areas: "header header"
                          "sidebar main";
@@ -49,15 +49,29 @@ body{
 
 #headerContainer{
     grid-area: header;
-    background-color: red;
+    background-color: #802626;
+    font-size: 20px;
+    color: white;
+}
+
+#headerContainer i{
+    margin-left: 20px;
+    margin-right: 10px;
+    font-size: 30px;
+    
+}
+
+#header{
+
 }
 
 /* Sidebar */
 
 #sidebarContainer{
     grid-area: sidebar;
-    background-color: yellow;
+    background-color: #b0b0b0;
     padding: 20px;
+    font-size: 25px;
 }
 
 #sidebarTabs li{
@@ -66,7 +80,8 @@ body{
 
 #sidebarTabs button{
     border: none;
-    background-color: white;
+    background-color: #b0b0b0;
+    font-size: 20px;
 }
 
 #sidebarTabs button:focus{
@@ -95,6 +110,10 @@ body{
     padding: 10px;
 }
 
+.defaultProject i{
+    margin-right: 5px;
+}
+
 .btnProject{
     display: flex;
     justify-content: space-between;
@@ -103,8 +122,12 @@ body{
 /* project add pop up */
 
 #projectAddBtn, #projectCancelBtn{
-    width: 49%;
+    width: 45%;
     text-align: center;
+    background-color:#0c070781;
+    margin-top: 10px;
+    padding: 5px 0px;
+    
 }
 
 #newProject,#projectPopupContainer{
@@ -113,6 +136,7 @@ body{
 
 #projectInputName{
     width: 100%;
+    font-size: 25px;
 }
 
 
@@ -244,6 +268,8 @@ body{
 
 .formHeader{
     text-align: center;
+    text-decoration-line: underline;
+    font-size: 25px;
 }
 
 #taskDueDate{
@@ -253,6 +279,7 @@ body{
 #descriptionInput{
     margin-top: 10px;
     min-height: 50px;
+    width: 100%;
 }
 
 /* Edit task form */
