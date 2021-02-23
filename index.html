@@ -49,6 +49,7 @@
       <div id='formContainer' class='hideContent'>
         <form class='formPopup' id= 'formPopup' action=''>
           <p class='formHeader'>New Task</p>
+          <label for='titleInput'>Title: </span>
           <input name='titleInput' class='formInput' type='text' placeholder='Title' id='titleInput' required/>
           <textarea placeholder='Description' id='descriptionInput'></textarea>
           <!--
@@ -59,7 +60,7 @@
           <select id='taskPriority' name='taskPriority'>
               <option value='low'>Low</option>
               <option value='medium'>Medium</option>
-              <option value='High'>High</option>
+              <option value='high'>High</option>
           </select>
           <label for='taskProject'>Choose a project:</label>
           <select id='taskProject' name='taskProject'>
@@ -69,6 +70,9 @@
           <button class='btnCloseForm' id='btnCloseForm'>Cancel</button>
         </form>
       </div>
+
+       
+
 
     <script src="main.js"></script>
   </body>

@@ -24,6 +24,18 @@ body{
     border: 1px solid red;
 }
 
+.lowPriority{
+    border-left: 8px solid green;
+}
+
+.mediumPriority{
+    border-left: 8px solid rgb(253, 183, 30);
+}
+
+.highPriority{
+    border-left: 8px solid red;
+}
+
 
 .bodyContainer{
     display: grid;
@@ -113,7 +125,7 @@ body{
 #mainContent{
     grid-area: main;
     width: 800px;
-    margin: 50px auto;
+    margin: 50px 25%;
     /*
     display: grid;
     grid-template-rows: 50px auto;
@@ -161,7 +173,12 @@ body{
     border-bottom: 2px solid lightblue;
     /* priority colouring 
     border-left: 2px solid yellow; */
+    
 }
+
+/* .taskLeftSide{
+    border-left: 8px solid red;
+} */
 
 .task button{
     height: 100%;
@@ -216,9 +233,17 @@ body{
     border-radius: 5px;
     width: 400px;
     height: 450px;
-    text-align: center;
+    /* text-align: center; */
     font-family: 'Lato', sans-serif;
+    
+}
+
+#formContainer label{
     font-size: 25px;
+}
+
+.formHeader{
+    text-align: center;
 }
 
 #taskDueDate{
@@ -230,3 +255,4 @@ body{
     min-height: 50px;
 }
 
+/* Edit task form */
