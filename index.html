@@ -8,14 +8,14 @@
   </head>
   <body class='bodyContainer'>
       <div id='headerContainer'>
-        <h1 id='header'>Todo List</h1>
+        <h1 id='header'><i class='material-icons'>auto_stories</i>Todo List</h1>
       </div>
 
       <div id='sidebarContainer'>
         <div id='sidebarTabs'>
-          <li><button id='default' class='defaultProject'>Default</button></li>
-          <li><button id='today' class='defaultProject'>Today</button></li>
-          <li><button id='thisWeek' class='defaultProject'>This Week</button></li>
+          <li><button id='default' class='defaultProject'><i class='material-icons'>event_note</i>Default</button></li>
+          <li><button id='today' class='defaultProject'><i class='material-icons'>event_note</i>Today</button></li>
+          <li><button id='thisWeek' class='defaultProject'><i class='material-icons'>event_note</i>This Week</button></li>
           <li id='projectsContainer'>
             <h2 id='projectsHeader'>Projects</h2>
             <div id='projectList'>
@@ -49,8 +49,8 @@
       <div id='formContainer' class='hideContent'>
         <form class='formPopup' id= 'formPopup' action=''>
           <p class='formHeader'>New Task</p>
-          <label for='titleInput'>Title: </span>
-          <input name='titleInput' class='formInput' type='text' placeholder='Title' id='titleInput' required/>
+          <label for='titleInput'>Title: </label>
+          <input id='titleInput' class='formInput' name='titleInput' type='text' placeholder='Title' maxlength='16' required/>
           <textarea placeholder='Description' id='descriptionInput'></textarea>
           <!--
           <input class='formInput' type='text' placeholder='Description' id='descriptionInput' required>
