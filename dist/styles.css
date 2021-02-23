@@ -195,14 +195,8 @@ body{
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 2px solid lightblue;
-    /* priority colouring 
-    border-left: 2px solid yellow; */
     
 }
-
-/* .taskLeftSide{
-    border-left: 8px solid red;
-} */
 
 .task button{
     height: 100%;
@@ -216,7 +210,7 @@ body{
 }
 
 .task span{
-    
+    font-size: 20px;
 }
 
 /* divide task into left and right side */
