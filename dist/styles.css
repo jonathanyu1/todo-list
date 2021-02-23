@@ -262,14 +262,14 @@ body{
     
 }
 
-#formContainer label{
+.formContainer label{
     font-size: 25px;
 }
 
 .formHeader{
     text-align: center;
     text-decoration-line: underline;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .titleInputContainer{
@@ -278,15 +278,15 @@ body{
     justify-content: space-between;
 }
 
-#titleInput{
+.titleInput{
     width: 80%;
 }
 
-#taskDueDate{
+.taskDueDate{
     width: 100%;
 }
 
-#descriptionInput{
+.descriptionInput{
     margin-top: 10px;
     margin-bottom: 5px;
     min-height: 50px;
@@ -301,7 +301,7 @@ body{
     margin-bottom: 10px;
 }
 
-#taskPriority{
+.taskPriority{
     width: 40%;
 }
 
@@ -313,7 +313,7 @@ body{
     margin-bottom: 10px;
 }
 
-#taskProject{
+.taskProject{
     width: 40%;
 }
 
@@ -331,6 +331,7 @@ body{
 .btnAddTask{
     padding-left: 15px;
     padding-right: 15px;
+    margin: 20px 15px 0px 0px;
 }
 
 /* Edit task form */
