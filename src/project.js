@@ -40,6 +40,35 @@ const project = (name) => {
         tasksList.sort(compare);
     }
 
+    /***
+     * so this is new - the method simply pulls the
+     *  data from each variable and stores it into an
+     *  object. Then it creates an array of tasks,
+     *  calling the `save` method on each object, 
+     *  which does exactly the same - sends a data
+     *  object back.
+     */
+
+    // const save = () => {
+    //     const returnObj = {
+    //       name,
+    //       tasksList:[],
+    //     };
+    //     tasksList.forEach(task => {
+    //       returnObj.tasksList.push(task.save())
+    //     })
+  
+    //     return returnObj;
+    //   }
+
+    const save = () =>{
+        const returnObj = {
+          name,
+          tasksList: tasksList.map(task => task.save() ),
+        };
+        return returnObj;
+      }
+
     const sayHello = () => console.log('hello project');
     return {
         getName,
@@ -50,8 +79,26 @@ const project = (name) => {
         getTask,
         sayHello,
         sortTasksByDate,
-        clearTasks
+        clearTasks,
+        save
     }
 }
 
 export {project}
+
+// const Task = (title, description) => {
+//     const save = () => {
+//         // the function is tiny here, so I simply send
+//         //  back the data as an object!
+//         return {title, description};
+//       }
+//       return { save }
+//     }
+    
+    
+    
+//     const myProject = Project("Stuf to do");
+//     myProject.addTask(Task("clean", "got to clean this mess"));
+//     myProject.addTask(Task("Make waffles", "Love me some waffles"));
+    
+//     console.log(JSON.stringify(myProject.save(), null, 2));

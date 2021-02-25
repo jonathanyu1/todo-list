@@ -7,12 +7,86 @@ import { requiredFieldAdd, requiredFieldRemove, setEditTaskForm, openEditTaskFor
 
 // * Things Left to do: *     
 
-// - local storage
+// - local storage: find spots to updateStorage()
+
+// * issues with storage: *
+// 
 
 const siteFlow = (()=>{
-    // const inbox = project('inbox');
+    let projectList=[];
 
-    let projectList = [];
+    const updateStorage = () => {
+        const tempProjectList = [];
+        projectList.forEach((projectObject)=>{
+            // console.log(JSON.stringify(projectObject.save(),null,2));
+            tempProjectList.push(JSON.stringify(projectObject.save()));
+        });
+        localStorage.setItem('tempProjectList', JSON.stringify(tempProjectList));
+        
+    }
+
+    const localStorageGrabber = () =>{
+        let storageProjectList = JSON.parse(localStorage.getItem('tempProjectList'));
+        storageProjectList.forEach((projectString)=>{
+            let parseProject = JSON.parse(projectString);
+            const newProject = project(parseProject.name);
+            parseProject.tasksList.forEach((taskStr)=>{
+                newProject.addTask(task(taskStr.title,taskStr.description,taskStr.dueDate,taskStr.priority,taskStr.project,taskStr.UUID))
+            });
+            projectList.push(newProject);
+        });
+    }
+
+    function storageAvailable(type) {
+        var storage;
+        try {
+            storage = window[type];
+            var x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        }
+        catch(e) {
+            return e instanceof DOMException && (
+                // everything except Firefox
+                e.code === 22 ||
+                // Firefox
+                e.code === 1014 ||
+                // test name field too, because code might not be present
+                // everything except Firefox
+                e.name === 'QuotaExceededError' ||
+                // Firefox
+                e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                // acknowledge QuotaExceededError only if there's something already stored
+                (storage && storage.length !== 0);
+        }
+    }
+
+    // if (storageAvailable('localStorage')) {
+    //     // Yippee! We can use localStorage awesomeness
+    //     console.log('localStorage available!');
+    //     // if localStorage has tempProjectList then get it
+    //     if(localStorage.getItem('tempProjectList')) {
+    //         console.log('yes projectList');
+    //         console.log(projectList);
+    //         // localStorageGrabber();
+    //         // update project List Container on side
+    //         // add event listeners for projects
+    //         // now need to simulate 'Default' click:
+    //         // display all tasks under 'Default'
+    //     } else {
+    //     // no projectList so this is new user
+    //     // initialize storage projectList
+    //         console.log('no projectList');
+    //     }
+      
+    // } else {
+    //     // Too bad, no localStorage for us
+    //     console.log('no localStorage available :(');
+    // }
+
+    
+
     let currentEvent = '';
 
     const defaultProject = project('Default');
@@ -100,6 +174,7 @@ const siteFlow = (()=>{
     const addProject = (projectName) =>{
         const newProject = project(projectName);
         projectList.push(newProject);
+        updateStorage();
     }
 
     const addTaskToProject = (task) =>{
@@ -108,6 +183,7 @@ const siteFlow = (()=>{
                 item.addTask(task);
             }
         });
+        updateStorage();
     }
 
     const addTaskEdit = () => {
@@ -132,6 +208,7 @@ const siteFlow = (()=>{
         // display project
         let currProject = selectCurrentProject(taskProject.value);
         displayTasks(currProject);
+        updateStorage();
     }
 
     const addTask = () => {
@@ -156,13 +233,49 @@ const siteFlow = (()=>{
         // display project
         let currProject = selectCurrentProject(taskProject.value);
         displayTasks(currProject);
+
     }
 
     const inboxProjectInit = (() => {
-        addProject('Inbox');
-        addProjectDom('Inbox');
-        projectEventListener();
-        // add event listener for inbox
+        // addProject('Inbox');
+        // addProjectDom('Inbox');
+        // projectEventListener();
+       // updateStorage();
+        
+       if (storageAvailable('localStorage')) {
+        // Yippee! We can use localStorage awesomeness
+        console.log('localStorage available!');
+        // if localStorage has tempProjectList then get it
+        if(localStorage.getItem('tempProjectList')) {
+            console.log('yes projectList');
+            console.log(projectList);
+            localStorageGrabber();
+            console.log('hi');
+            console.log(projectList[0].getName());
+            // update project List Container on side
+            projectList.forEach((projectObject)=>{
+                addProjectDom(projectObject.getName());
+            });
+            // add event listeners for projects
+            projectEventListener();
+            // now need to simulate 'Default' click:
+            // display all tasks under 'Default'
+            document.querySelector('.defaultProject').click();
+        } else {
+        // no tempProjectList so this is new user
+        // initialize 
+            console.log('no projectList');
+            addProject('Inbox');
+            addProjectDom('Inbox');
+            projectEventListener();
+            updateStorage();
+        }
+      
+    } else {
+        // Too bad, no localStorage for us
+        console.log('no localStorage available :(');
+    }
+
 
     })();
 
@@ -287,6 +400,7 @@ const siteFlow = (()=>{
             } else {
                 displayDomTasks(projectObj);
             }
+        updateStorage();
     }
 
     document.body.addEventListener( 'click', function (event) {
@@ -315,6 +429,7 @@ const siteFlow = (()=>{
             // refresh current displayed tasklist
             const currDisplayProject = document.querySelector('#todoProjectTitle').innerHTML;
             document.querySelector('.defaultProject').click();
+            updateStorage();
         }
         // click 'edit' button on task
         console.log(event.target);

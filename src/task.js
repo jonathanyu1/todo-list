@@ -47,6 +47,13 @@ const task = (title, description, dueDate, priority, project, UUID) =>{
         status = newStatus;
     }
 
+    // const Task = (title, description, dueDate, priority, project, UUID) => {
+    const save = () => {
+        // the function is tiny here, so I simply send
+        //  back the data as an object!
+        return {title, description, dueDate, priority, project, UUID};
+      }
+
     return {
         getUUID,
         setUUID,
@@ -61,7 +68,8 @@ const task = (title, description, dueDate, priority, project, UUID) =>{
         getProject,
         setProject,
         getStatus,
-        setStatus
+        setStatus,
+        save
     }
 }
 
